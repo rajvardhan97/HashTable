@@ -11,10 +11,10 @@ namespace HashTable
         public K Key { get; set; }
         public V Value { get; set; }
     }
-    internal class MyMapNode<K,V>
+    internal class MyMapNode<K, V>
     {
-        private readonly int size;
-        private readonly LinkedList<KeyValue<K, V>>[] items;
+        private  int size;
+        private  LinkedList<KeyValue<K, V>>[] items;
 
         public MyMapNode(int size)
         {
@@ -93,6 +93,26 @@ namespace HashTable
                 }
             }
             return count;
+        }
+
+        public void Remove(K key)
+        {
+            int position = GetArrayPosition(key);
+            LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
+            bool itemFound = false;
+            KeyValue<K, V> foundItem = default(KeyValue<K, V>);
+            foreach (KeyValue<K, V> item in linkedList)
+            {
+                if (item.Key.Equals(key))
+                {
+                    itemFound = true;
+                    foundItem = item;
+                }
+            }
+            if (itemFound)
+            {
+                linkedList.Remove(foundItem);
+            }
         }
     }
 }
