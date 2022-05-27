@@ -111,8 +111,10 @@ namespace HashTable
             }
             if (itemFound)
             {
-                linkedList.Remove(foundItem);
+            linkedList.Remove(foundItem);
             }
+           
+
         }
     }
 }

@@ -10,7 +10,7 @@ namespace HashTable
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Press 1 for frequency of words\n2. for frequency of words in paragraph\n");
+            Console.WriteLine("Press 1 for frequency of words\n2. for frequency of words in paragraph\n3. Remove a word");
             int choice = Convert.ToInt32(Console.ReadLine());
             switch (choice)
             {
@@ -32,12 +32,13 @@ namespace HashTable
                 case 2:
                     string temp = "Paranoids are not paranoid because they are paranoid but because " +
                         "they keep putting themselves deliberately into paranoid avoidable situations";
-                    string[] samplephrase = temp.ToLower().Split(" ");
-
+                    string[] samplephrase = temp.ToLower().Split();
                     var phrase = samplephrase.Distinct();
-
                     int length = 0;
-                    foreach (var item in phrase) { length++; }
+                    foreach (var item in phrase)
+                    { 
+                        length++;
+                    }
 
                     MyMapNode<string, int> hash1 = new MyMapNode<string, int>(length);
 
@@ -55,12 +56,35 @@ namespace HashTable
                             hash1.Add(word, 1);
                         }
                     }
-
-                    Console.WriteLine($"{"Frequency",20} = {"Count",10}\n");
+                    Console.WriteLine($"{"Frequency",15} = {"Count",5}\n");
                     foreach (string key in phrase)
                     {
-                        Console.WriteLine($"{key,20} = {hash1.GetValue(key),10}");
+                        Console.WriteLine($"{key,15} = {hash1.GetValue(key),5}");
                     }
+                    break;
+
+                case 3:
+                    string temp2 = "Paranoids are not paranoid because they are paranoid but because " +
+                "they keep putting themselves deliberately into paranoid avoidable situations";
+                    string[] samplephrase2 = temp2.ToLower().Split();
+                    var phrase2 = samplephrase2.Distinct();
+                    int length2 = 0;
+                    foreach (var item in samplephrase2)
+                    {
+                        length2++;
+                    }
+
+                    MyMapNode<string, int> hash2 = new MyMapNode<string, int>(length2);
+                    hash2.Remove("avoidable");
+
+                    foreach (string value in samplephrase2)
+                    {
+                        Console.Write(value + " ");
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid Input");
                     break;
             }
         }
